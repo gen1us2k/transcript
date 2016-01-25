@@ -7,6 +7,7 @@ import (
 	"bufio"
 	"strings"
 	"fmt"
+	"path/filepath"
 )
 
 var cmudict map[string]string
@@ -63,6 +64,9 @@ func TransliterateRussian(s string) string {
 }
 
 func LoadDict(filename string){
+	if filename == "" {
+		filename, _ = filepath.Abs("data/cmudict.0.7a")
+	}
 	cmudict = make(map[string]string)
 	cmufile, err := os.Open(filename)
 	if err != nil {
